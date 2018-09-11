@@ -1,0 +1,25 @@
+import pandas as pd
+from sqlalchemy import create_engine
+#先安装sqlalchemy
+#可能会出现No module named MySQL 问题，参见 印象笔记的stackoverflow的回答，pip install mysql-connector-python-rf
+engine = create_engine('mysql+mysqlconnector://root:root@localhost:3306/test_created_by_python?charset=utf8')
+#   engine = create_engine('mysql+mysqlconnector://[user]:[pass]@[host]:[port]/[db]', echo=False)
+#   cnx = engine.raw_connection()
+#   data = pd.read_sql('SELECT * FROM [table]', cnx)
+
+#[]中的是要填写的，[]最后要删除
+cnx = engine.raw_connection()
+#data = pd.read_sql('SELECT * FROM [table]', cnx)
+data = pd.read_sql('SELECT * FROM teacher', cnx)
+data
+---------
+out:
+age	gender
+0	25	Male
+1	35	Male
+2	45	Female
+---------
+type(data)
+---------
+out:
+pandas.core.frame.DataFrame
